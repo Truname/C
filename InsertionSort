@@ -1,0 +1,16 @@
+void InsertionSort(int a[], int size) 
+{//插入排序：将元素分成有序和无序两个部分，每次无序部分的元素插入一个到有序部分p，
+//并将原p后面的元素都向后移动一个位置
+	for (int i = 1; i < size; ++i) {//a[i]是最左的无序元素，每次循环将a[i]放到合适位置
+		for (int j = 0; j < i; ++j) {
+			if (a[j] > a[i]) {//要把a[i]放到位置j，原下标j到i-1的元素都往后移一个位子
+				int tmp = a[i];
+				for (int k = i; k > j; --k)
+					a[k] = a[k - 1];
+				a[j] = tmp;
+				break;
+			}
+		}
+	}
+
+}
