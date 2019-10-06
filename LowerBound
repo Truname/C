@@ -1,0 +1,16 @@
+int LowerBound(int a[], int size, int p)
+{//二分查找:在从小到大排好序的数组a中查找比p小的下标最大的元素
+	int L = 0;						//查找区间左端点
+	int R = size - 1;				//查找区间右端点
+	int lastPos = -1;				//目前找到的最优解
+	while (L <= R) {				//如果查找区间不为空就继续查找
+		int mid = L + (R - L) / 2;	//去查找区间正中元素的下标
+		if (a[mid] >= p)
+			R = mid - 1;
+		else {
+			lastPos = mid;
+			L = mid + 1;
+		}
+	}
+	return lastPos;
+}//复杂度O(log(n))
