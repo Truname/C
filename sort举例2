@@ -1,0 +1,50 @@
+#include<iostream>
+#include<cstdio>
+#include<cstring>
+#include<string>
+#include<algorithm>
+using namespace std;
+
+struct Student {
+	char name[20];
+	int id;
+	double GPA;
+};
+Student students[] = {
+	{"Jack",112,3.4},{"Mary",102,3.8},{"Ala",333,3.5}
+};
+
+struct StudentRule1 {//按姓名从小到大排
+	bool operator()(const Student&s1, const Student&s2) {
+		if (_stricmp(s1.name, s2.name) < 0)
+			return true;
+		return false;
+	}
+};
+struct StudentRule2 {//按id从小到大排
+	bool operator()(const Student&s1, const Student&s2) {
+		return s1.id < s2.id;
+	}
+};
+struct StudentRule3{//按GPA从大到小排
+	bool operator()(const Student&s1, const Student&s2) {
+		return s1.GPA > s2.GPA;
+	}
+};
+
+void PrintStudents(Student s[], int size) {
+	for (int i = 0; i < size; ++i)
+		cout << "(" << s[i].name << "," << s[i].id << "," << s[i].GPA << ") ";
+	cout << endl;
+}
+
+int main() {
+	int n = sizeof(students) / sizeof(Student);
+	sort(students, students + n, StudentRule1());//按姓名从小到大排
+	PrintStudents(students, n);
+	sort(students, students + n, StudentRule2());//按id从小到大排
+	PrintStudents(students, n);
+	sort(students, students + n, StudentRule3());//按GPA从高到低排
+	PrintStudents(students, n);
+	return 0;
+}
